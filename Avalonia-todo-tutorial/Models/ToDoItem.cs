@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace Avalonia_todo_tutorial.Models
 {
-    internal class ToDoItem
+    public class ToDoItem
 {
-    public bool IsChecked { set; get; }
+        /// <summary>
+        /// Gets or sets the checked status of each item
+        /// </summary>
+        public bool IsChecked { set; get; }
 
-    public string? Content { get; set; }
+        /// <summary>
+        /// Gets or sets the content of the to-do item
+        /// </summary>
+       public string? Content { get; set; }
 
 }
 }
