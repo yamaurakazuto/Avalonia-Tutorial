@@ -1,4 +1,9 @@
-﻿namespace Avalonia_todo_tutorial.ViewModels
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
+
+namespace Avalonia_todo_tutorial.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
@@ -9,7 +14,7 @@
         [RelayCommand (CanExecute = nameof(CanAddItem))]
         private void AddItem()
         {
-            ToDoItems.Add(new TODoItemViewModel()
+            ToDoItems.Add(new ToDoItemViewModel()
             {
                 Content = NewItemContent
             });
@@ -18,7 +23,7 @@
         }
 
         [RelayCommand]
-        private void RemoveItem(TodoItemViewModel item)
+        private void RemoveItem(ToDoItemViewModel item)
         {
             ToDoItems.Remove(item);
         }
