@@ -18,5 +18,16 @@ namespace Avalonia_todo_tutorial.Models
         /// </summary>
        public string? Content { get; set; }
 
+
+        public ToDoItem GetToDoItem()
+        {
+            return new ToDoItem()
+            {
+                IsChecked = this.IsChecked,
+                Content = this.Content
+            };
+        }
+
 }
+
 }
