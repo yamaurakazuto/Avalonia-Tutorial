@@ -28,5 +28,23 @@ namespace Avalonia_todo_tutorial
 
             base.OnFrameworkInitializationCompleted();
         }
+
+        private readonly MainViewModel _mainViewModel = new MainViewModel();
+
+        public override void OnFrameworkInitializationCompleted()
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = _mainViewModel // Remember to change this line to use our private reference to the MainViewModel
+                };
+
+                // Listen to the ShutdownRequested-event
+                desktop.ShutdownRequested += DesktopOnShutdownRequested;
+            }
+
+
+
+        }
     }
-}
