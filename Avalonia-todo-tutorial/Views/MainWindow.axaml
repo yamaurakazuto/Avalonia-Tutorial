@@ -26,14 +26,36 @@
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl ItemsSource="{Binding ToDoItems}">
+                 <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="vm:ToDoItemViewModel">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <CheckBox Content="{Binding Content}"
+                                  IsChecked="{Binding IsChecked}" />
+
+                        <Button Command="{Binding #Root.((vm:MainWindowViewModel)DataContext).RemoveItemCommand}"
+                                CommandParameter="{Binding .}"
+                                Grid.Column="1">
+                            Delete
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
 
         <TextBox Grid.Row="2"
                  Text="{Binding NewItemContent}"
                  PlaceholderText="Add a new Item">
-        </TextBox>
+            <TextBox.InnerRightContent>
+                <Button Command="{Binding AddItemCommand}" >
+                    Add
+                </Button>
+            </TextBox.InnerRightContent>
 
+            <TextBox.KeyBindings>
+                <KeyBinding Command="{Binding AddItemCommand}" Gesture="Enter" />
+            </TextBox.KeyBindings>
+        </TextBox>
 
     </Grid>
 
