@@ -16,18 +16,8 @@ namespace Avalonia_todo_tutorial.Models
         /// <summary>
         /// Gets or sets the content of the to-do item
         /// </summary>
-       public string? Content { get; set; }
+        public string? Content { get; set; }
 
-
-        public ToDoItem GetToDoItem()
-        {
-            return new ToDoItem()
-            {
-                IsChecked = this.IsChecked,
-                Content = this.Content
-            };
-        }
-
-}
+    }
 
 }

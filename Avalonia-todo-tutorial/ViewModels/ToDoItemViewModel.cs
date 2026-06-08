@@ -1,24 +1,35 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia_todo_tutorial.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Avalonia_todo_tutorial.ViewModels
 {
     public partial class ToDoItemViewModel : ViewModelBase
     {
         [ObservableProperty]
-        public partial bool _isChecked;
+        private bool isChecked;
 
         [ObservableProperty]
-        public partial string? _content;
+        private string? content;
 
         public ToDoItemViewModel()
         { 
 
         }
 
-        public ToDoItemViewModel(ToDoItemViewModel item)
+        public ToDoItemViewModel(ToDoItem item)
         {
-            _isChecked = item._isChecked;
+            IsChecked = item.IsChecked;
             Content = item.Content;
+        }
+
+
+        public ToDoItem GetToDoItem()
+        {
+            return new ToDoItem()
+            {
+                IsChecked = this.IsChecked,
+                Content = this.Content
+            };
         }
     }
 }
