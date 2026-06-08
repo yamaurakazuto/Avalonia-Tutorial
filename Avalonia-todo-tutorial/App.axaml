@@ -5,11 +5,31 @@
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+<Application.Resources>
+    <!--  These are re-usable Icon data. You can get the path data from svg-files for example  -->
+    <StreamGeometry x:Key="DeleteIconData">M10,2 L18,10 L10,18 L2,10 Z</StreamGeometry>
+    <StreamGeometry x:Key="AcceptIconData">M4,4 L16,16 M16,4 L4,16</StreamGeometry>
+</Application.Resources>
+
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
   
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="TextBlock.h1">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+        <Style Selector="CheckBox">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <!--  These styles add some useful feedback for the user  -->
+    <Style Selector="CheckBox:pointerover /template/ Grid#RootGrid">
+        <Setter Property="Background" Value="{DynamicResource SystemAccentColorLight3}" />
+    </Style>
     </Application.Styles>
 </Application>

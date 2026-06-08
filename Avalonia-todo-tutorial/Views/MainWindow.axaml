@@ -22,7 +22,7 @@
           x:Name="Root">
        
         
-        <TextBlock Text="My Todo-List" />
+        <TextBlock Classes="h1" Text="My Todo-List" />
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl ItemsSource="{Binding ToDoItems}">
@@ -48,6 +48,8 @@
                  PlaceholderText="Add a new Item">
             <TextBox.InnerRightContent>
                 <Button Command="{Binding AddItemCommand}" >
+                   <PathIcon Data="{DynamicResource AcceptIconData}"
+                    Foreground="Green" />
                     Add
                 </Button>
             </TextBox.InnerRightContent>
