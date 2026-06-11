@@ -23,6 +23,7 @@ namespace Avalonia_todo_tutorial.ViewModels
         }
 
 
+
         public ToDoItem GetToDoItem()
         {
             return new ToDoItem()

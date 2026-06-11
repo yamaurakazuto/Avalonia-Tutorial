@@ -6,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia_todo_tutorial.ViewModels;
 using Avalonia_todo_tutorial.Views;
+using Avalonia_todo_tutorial.Services;
 
 namespace Avalonia_todo_tutorial
 {
@@ -16,20 +17,9 @@ namespace Avalonia_todo_tutorial
             AvaloniaXamlLoader.Load(this);
         }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
-            }
+       
 
-            base.OnFrameworkInitializationCompleted();
-        }
-
-        private readonly MainViewModel _mainViewModel = new MainViewModel();
+        private readonly MainWindowViewModel _mainViewModel = new MainWindowViewModel();
 
         public override void OnFrameworkInitializationCompleted()
         {
@@ -44,7 +34,27 @@ namespace Avalonia_todo_tutorial
                 desktop.ShutdownRequested += DesktopOnShutdownRequested;
             }
 
+            base.OnFrameworkInitializationCompleted();
 
 
         }
+
+        private bool _canClose;
+        private async void DesktopOnShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
+        {
+            e.Cancel = !_canClose; // Cancel the shutdown process if we haven't saved yet
+
+            if (!_canClose)
+            {
+                var itemToSave = _mainViewModel.ToDoItems.Select(item => item.GetToDoItem());
+                await ToDoListFileService.SaveToFileAsync(itemToSave);
+
+                _canClose = true;
+                if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    desktop.Shutdown(); // Now we can safely shutdown the application
+                }
+            }
+        }
     }
+}
